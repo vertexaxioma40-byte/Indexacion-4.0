@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from web3 import Web3
 from supabase import create_client, Client
+from fastapi.responses import HTMLResponse
 
 load_dotenv()
 
