@@ -182,3 +182,22 @@ async def petrify_file(
         return {"status": "success", "manifiesto": resultado}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+if supabase:
+        try:
+            db_payload = {
+                "root_hash": root_hash,
+                "target_file": file.filename,
+                "timestamp_utc": timestamp_str,
+                "tx_hash": tx_hash,
+                "metadata_caso": manifiesto["metadata_caso"],
+                "compliance_seal": "Sello de Inmutabilidad Transfronteriza"
+            }
+            print(f"[DEBUG AXIOMA] Enviando a Supabase: {db_payload}")
+            
+            # Ejecutamos la inserción capturando la respuesta completa
+            response = supabase.table("axioma_evidencias").insert(db_payload).execute()
+            
+            print(f"[SUPABASE ÉXITO]: Respuesta recibida correctamente -> {response}")
+            
+        except Exception as db_err:
+            print(f"[ERROR CRÍTICO SUPABASE]: {type(db_err).__name__} -> {str(db_err)}")
