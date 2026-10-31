@@ -112,12 +112,13 @@ class AxiomaCloudPetrification:
             return f"ERROR_TX_SIMULATED_FALLBACK: {str(e)}"
 
     def save_to_supabase(self, manifest, tx_hash):
-        """Registra el manifiesto en Supabase."""
+        """Registra el manifiesto en Supabase con diagnóstico detallado."""
         if not self.supabase:
+            print("[ADVERTENCIA SUPABASE]: Cliente no inicializado o faltan credenciales.")
             return
 
         try:
-            data_to_insert = {
+            db_payload = {
                 "root_hash": manifest["root_hash"],
                 "target_file": manifest["target_file"],
                 "timestamp_utc": manifest["timestamp_utc"],
@@ -125,9 +126,13 @@ class AxiomaCloudPetrification:
                 "metadata_caso": manifest["metadata_caso"],
                 "compliance_seal": manifest["compliance_seal"]
             }
-            self.supabase.table("axioma_evidencias").insert(db_payload).execute()
-        except Exception as e:
-            print(f"Error Supabase: {e}")
+            print(f"[DEBUG AXIOMA] Enviando a Supabase: {db_payload}")
+            
+            response = self.supabase.table("axioma_evidencias").insert(db_payload).execute()
+            print(f"[SUPABASE ÉXITO]: Respuesta recibida correctamente -> {response}")
+            
+        except Exception as db_err:
+            print(f"[ERROR CRÍTICO SUPABASE]: {type(db_err).__name__} -> {str(db_err)}")
 
     def execute(self):
         self.process_binary()
@@ -182,22 +187,3 @@ async def petrify_file(
         return {"status": "success", "manifiesto": resultado}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-if supabase:
-        try:
-            db_payload = {
-                "root_hash": root_hash,
-                "target_file": file.filename,
-                "timestamp_utc": timestamp_str,
-                "tx_hash": tx_hash,
-                "metadata_caso": manifiesto["metadata_caso"],
-                "compliance_seal": "Sello de Inmutabilidad Transfronteriza"
-            }
-            print(f"[DEBUG AXIOMA] Enviando a Supabase: {db_payload}")
-            
-            # Ejecutamos la inserción capturando la respuesta completa
-            response = supabase.table("axioma_evidencias").insert(db_payload).execute()
-            
-            print(f"[SUPABASE ÉXITO]: Respuesta recibida correctamente -> {response}")
-            
-        except Exception as db_err:
-            print(f"[ERROR CRÍTICO SUPABASE]: {type(db_err).__name__} -> {str(db_err)}")
