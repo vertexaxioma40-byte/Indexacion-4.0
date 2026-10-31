@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERTEX AXIOMA® - Motor de Petrificación Digital 4.0</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        axioma: {
+                            bg: '#0B0F19',
+                            card: '#111827',
+                            border: '#1F2937',
+                            cyan: '#06B6D4',
+                            gold: '#D97706',
+                            goldHover: '#B45309',
+                            accent: '#3B82F6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: #F3F4F6;
+            font-family: 'Inter', sans-serif;
+        }
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(217, 119, 6, 0.25);
+        }
+        .drop-zone-active {
+            border-color: #06B6D4 !important;
+            background-color: rgba(6, 182, 212, 0.05) !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar Top -->
+    <header class="border-b border-gray-800 bg-axioma-card/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-amber-500 flex items-center justify-center font-bold text-slate-950 text-xl shadow-lg">
+                    VA
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wider text-white">VERTEX AXIOMA<span class="text-xs text-amber-500 align-super">®</span></h1>
+                    <p class="text-xs text-cyan-400 tracking-wider">MOTOR DE PETRIFICACIÓN & AUDITORÍA FORENSE 4.0</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-950 text-emerald-400 border border-emerald-800">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
+                    Polygon Amoy Testnet
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-950 text-amber-400 border border-amber-800">
+                    Sello Transfronterizo
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        
+        <!-- Banner Informativo CFI Innova -->
+        <div class="mb-8 p-4 rounded-xl bg-gradient-to-r from-gray-900 via-gray-900 to-cyan-950/40 border border-cyan-500/30 flex items-center justify-between shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div class="p-3 bg-cyan-500/10 rounded-lg text-cyan-400">
+                    <i class="fa-solid fa-shield-halved text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-sm font-semibold text-white">Demostrador Tecnológico - Presentación CFI Innova</h2>
+                    <p class="text-xs text-gray-400">Prueba de integridad de binarios con indexación ráster, anclaje descentralizado en Polygon y sincronización en Supabase Cloud.</p>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <span class="text-xs text-gray-500 font-mono">TRL-4 Functional PoC</span>
+            </div>
+        </div>
+
+        <!-- Grid de Trabajo (2 Columnas en Desktop) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Columna Izquierda: Formulario de Carga y Metadata -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="bg-axioma-card border border-gray-800 rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-file-arrow-up text-cyan-400"></i>
+                        Evidencia Digital
+                    </h3>
+                    
+                    <!-- URL del Backend (Configurable) -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-medium text-gray-400 mb-1">URL API Backend (Render / Localhost)</label>
+                        <input type="text" id="apiUrlInput" value="https://vertex-axioma-api.onrender.com" 
+                               class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-500">
+                    </div>
+
+                    <!-- Area de Drag & Drop -->
+                    <div id="dropZone" class="border-2 border-dashed border-gray-700 hover:border-cyan-500/50 rounded-xl p-6 text-center cursor-pointer transition-all duration-200 bg-gray-900/50 mb-4 group">
+                        <input type="file" id="fileInput" class="hidden">
+                        <div class="p-3 bg-gray-800/80 rounded-full w-12 h-12 mx-auto mb-3 flex items-center justify-center text-gray-400 group-hover:text-cyan-400 transition-colors">
+                            <i class="fa-solid fa-[#fa-cloud-arrow-up] fa-cloud-arrow-up text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-300 group-hover:text-cyan-300">Arrastrá cualquier archivo aquí o <span class="text-cyan-400 underline">examiná</span></p>
+                        <p class="text-xs text-gray-500 mt-1">Soporta binarios: PDF, PNG, JPG, MP4, DAT, etc.</p>
+                        
+                        <!-- File Preview Info -->
+                        <div id="fileInfo" class="hidden mt-4 p-3 bg-gray-800 rounded-lg text-left text-xs border border-cyan-500/30">
+                            <p class="font-semibold text-cyan-300 truncate" id="fileName">-</p>
+                            <p class="text-gray-400" id="fileSize">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Campos de Metadata Legal -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">N° de Expediente / Referencia</label>
+                            <input type="text" id="expedienteInput" value="EXP-2026-AXIOMA-CFI" 
+                                   class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Jurisdicción / Entidad Pericial</label>
+                            <input type="text" id="jurisdiccionInput" value="CFI Innova Demo / Poder Judicial" 
+                                   class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-cyan-500">
+                        </div>
+                    </div>
+
+                    <!-- Botón de Ejecución -->
+                    <button id="btnPetrify" class="w-full mt-6 bg-gradient-to-r from-cyan-600 to-amber-600 hover:from-cyan-500 hover:to-amber-500 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>PETRIFICAR EVIENCIA EN BLOCKCHAIN</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Consola de Resultados & Manifiesto -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="bg-axioma-card border border-gray-800 rounded-2xl p-6 shadow-xl min-h-[480px] flex flex-col justify-between">
+                    <div>
+                        <!-- Header de Manifiesto -->
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-4">
+                            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-file-contract text-amber-500"></i>
+                                Manifiesto Forense Inmutable
+                            </h3>
+                            <button id="btnCopyJson" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-md border border-gray-700 flex items-center gap-1 transition-colors">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Copiar JSON</span>
+                            </button>
+                        </div>
+
+                        <!-- Panel de Estado / Spinner -->
+                        <div id="statusPanel" class="hidden mb-4 p-4 rounded-xl bg-gray-900 border border-gray-800">
+                            <div class="flex items-center space-x-3">
+                                <div id="spinner" class="animate-spin text-cyan-400 text-lg">
+                                    <i class="fa-solid fa-circle-notch"></i>
+                                </div>
+                                <span id="statusText" class="text-sm font-mono text-gray-300">Procesando binario e indexando hashes...</span>
+                            </div>
+                        </div>
+
+                        <!-- Root Hash Highlight Box -->
+                        <div id="rootHashBox" class="hidden mb-4 p-4 rounded-xl bg-gradient-to-r from-cyan-950/50 to-gray-900 border border-cyan-500/40">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Root Hash (Prueba Petrificada)</span>
+                                <button id="btnCopyHash" class="text-[10px] text-cyan-300 hover:text-white underline">Copiar Hash</button>
+                            </div>
+                            <p id="rootHashValue" class="text-xs font-mono text-amber-400 break-all bg-black/40 p-2 rounded border border-gray-800">
+                                -
+                            </p>
+                        </div>
+
+                        <!-- Botón directo a Blockchain Explorer -->
+                        <div id="txExplorerBox" class="hidden mb-4">
+                            <a id="txExplorerLink" href="#" target="_blank" class="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-xl bg-gray-900 hover:bg-gray-800 border border-amber-500/30 text-xs font-mono text-amber-300 transition-colors">
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-link text-amber-500"></i>
+                                    <span>Ver Transacción On-Chain en Polygonscan</span>
+                                </span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-gray-500"></i>
+                            </a>
+                        </div>
+
+                        <!-- Visualizador JSON -->
+                        <div class="relative">
+                            <pre id="jsonViewer" class="bg-gray-950 border border-gray-800 rounded-xl p-4 text-xs font-mono text-cyan-300 h-64 overflow-y-auto leading-relaxed">
+// Esperando entrada de evidencia binaria...
+// Seleccioná un archivo y presioná "Petrificar Evidencia" para consultar el Manifiesto Inmutable.
+                            </pre>
+                        </div>
+                    </div>
+
+                    <!-- Footer del manifiesto -->
+                    <div class="pt-4 mt-4 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-500">
+                        <span>Algoritmo: SHA-256 (Raster/Binary Indexing)</span>
+                        <span>Protocolo AXIOMA® Standard v4.0</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer General -->
+    <footer class="border-t border-gray-800 bg-axioma-card py-4 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500">
+            <p>© 2026 VERTEX AXIOMA® - Sistema Autónomo de Preservación y Evidencia Digital Inmutable.</p>
+        </div>
+    </footer>
+
+    <!-- Script de Integración JS -->
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const btnPetrify = document.getElementById('btnPetrify');
+        const jsonViewer = document.getElementById('jsonViewer');
+        const statusPanel = document.getElementById('statusPanel');
+        const statusText = document.getElementById('statusText');
+        const spinner = document.getElementById('spinner');
+        const rootHashBox = document.getElementById('rootHashBox');
+        const rootHashValue = document.getElementById('rootHashValue');
+        const txExplorerBox = document.getElementById('txExplorerBox');
+        const txExplorerLink = document.getElementById('txExplorerLink');
+        const btnCopyJson = document.getElementById('btnCopyJson');
+        const btnCopyHash = document.getElementById('btnCopyHash');
+
+        let selectedFile = null;
+        let lastManifestJson = null;
+
+        // Manejo de Selección de Archivos
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        // Drag & Drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drop-zone-active');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drop-zone-active');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drop-zone-active');
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            selectedFile = file;
+            fileName.textContent = file.name;
+            fileSize.textContent = (file.size / 1024).toFixed(2) + ' KB';
+            fileInfo.classList.remove('hidden');
+        }
+
+        // Envío de Evidencia a la API
+        btnPetrify.addEventListener('click', async () => {
+            if (!selectedFile) {
+                alert('Por favor selecciones o arrastre un archivo antes de continuar.');
+                return;
+            }
+
+            const apiUrl = document.getElementById('apiUrlInput').value.trim();
+            const expediente = document.getElementById('expedienteInput').value.trim();
+            const jurisdiccion = document.getElementById('jurisdiccionInput').value.trim();
+
+            if (!apiUrl) {
+                alert('Ingrese la URL del API Backend.');
+                return;
+            }
+
+            // UI Loading state
+            statusPanel.classList.remove('hidden');
+            spinner.classList.remove('hidden');
+            statusText.textContent = 'Indexando binario y generando firma criptográfica...';
+            btnPetrify.disabled = true;
+            btnPetrify.classList.add('opacity-50');
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            try {
+                const endpoint = `${apiUrl.replace(/\/$/, '')}/petrify/?expediente=${encodeURIComponent(expediente)}&jurisdiccion=${encodeURIComponent(jurisdiccion)}`;
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error en el servidor: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                lastManifestJson = data.manifiesto || data;
+
+                // Render de Manifiesto
+                jsonViewer.textContent = JSON.stringify(lastManifestJson, null, 4);
+
+                // Render de Root Hash
+                const rootHash = lastManifestJson.root_hash || lastManifestJson.proof_petrified?.merkle_root_hash || "-";
+                rootHashValue.textContent = rootHash;
+                rootHashBox.classList.remove('hidden');
+
+                // Render Link de Blockchain (Polygonscan)
+                const txHash = lastManifestJson.blockchain_tx;
+                if (txHash && txHash.startsWith('0x')) {
+                    txExplorerLink.href = `https://amoy.polygonscan.com/tx/${txHash}`;
+                    txExplorerBox.classList.remove('hidden');
+                } else {
+                    txExplorerBox.classList.add('hidden');
+                }
+
+                statusText.textContent = '¡Evidencia petrificada con éxito!';
+                spinner.classList.add('hidden');
+
+            } catch (err) {
+                jsonViewer.textContent = `[ERROR]: ${err.message}\n\nAsegúrese de que el backend en Render/Local esté activo y tenga la ruta /petrify/ habilitada.`;
+                statusText.textContent = 'Error al procesar la evidencia.';
+                spinner.classList.add('hidden');
+            } finally {
+                btnPetrify.disabled = false;
+                btnPetrify.classList.remove('opacity-50');
+            }
+        });
+
+        // Funciones de Copiado al Portapapeles (Compatible con iFrames)
+        function copyToClipboard(text) {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+        }
+
+        btnCopyJson.addEventListener('click', () => {
+            if (lastManifestJson) {
+                copyToClipboard(JSON.stringify(lastManifestJson, null, 4));
+                alert('Manifiesto JSON copiado al portapapeles.');
+            }
+        });
+
+        btnCopyHash.addEventListener('click', () => {
+            if (rootHashValue.textContent !== '-') {
+                copyToClipboard(rootHashValue.textContent);
+                alert('Root Hash copiado al portapapeles.');
+            }
+        });
+    </script>
+</body>
+</html>
