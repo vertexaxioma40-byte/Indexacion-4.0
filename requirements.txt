@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+web3
+supabase
+python-dotenv
+python-multipart
