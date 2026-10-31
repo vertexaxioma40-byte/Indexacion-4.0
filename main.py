@@ -149,13 +149,20 @@ class AxiomaCloudPetrification:
         self.save_to_supabase(manifest, tx_hash)
         return manifest
 
-@app.get("/")
-def read_root():
-    return {
-        "ecosystem": "VERTEX AXIOMA",
-        "status": "Online",
-        "compliance_seal": "Sello de Inmutabilidad Transfronteriza"
-    }
+@app.get("/", response_class=HTMLResponse)
+def serve_home():
+    if os.path.exists("index.html"):
+        with open("index.html", "r", encoding="utf-8") as f:
+            return f.read()
+    return """
+    <html>
+        <head><title>VERTEX AXIOMA</title></head>
+        <body style="background: #0f172a; color: #38bdf8; font-family: monospace; text-align: center; padding-top: 50px;">
+            <h1>Sello de Inmutabilidad Transfronteriza</h1>
+            <p>API Operativa - Falta adjuntar el archivo index.html en el repositorio.</p>
+        </body>
+    </html>
+    """
 
 @app.post("/petrify/")
 async def petrify_file(
