@@ -108,23 +108,18 @@
                         Evidencia Digital
                     </h3>
                     
-                        <!-- URL del Backend (Configurable) -->
-                        <div class="mb-4">
-                            <label class="block text-xs font-medium text-gray-400 mb-1">URL API Backend (Render / Localhost)</label>
-                            <input type="text" id="apiUrlInput" value="https://indexacion-4-0.onrender.com"
+                    <!-- URL del Backend (Configurable) -->
                     <div class="mb-4">
-    <label class="block text-xs font-medium text-gray-400 mb-1">URL API Backend (Render / Localhost)</label>
-    <input type="text" id="apiUrlInput" value="https://indexacion-4-0.onrender.com" 
-           class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-500">
-</div>
-                                   class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-500">
-                        </div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">URL API Backend (Render / Localhost)</label>
+                        <input type="text" id="apiUrlInput" value="https://indexacion-4-0.onrender.com" 
+                               class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-xs font-mono text-cyan-300 focus:outline-none focus:border-cyan-500">
+                    </div>
 
                     <!-- Area de Drag & Drop -->
                     <div id="dropZone" class="border-2 border-dashed border-gray-700 hover:border-cyan-500/50 rounded-xl p-6 text-center cursor-pointer transition-all duration-200 bg-gray-900/50 mb-4 group">
                         <input type="file" id="fileInput" class="hidden">
                         <div class="p-3 bg-gray-800/80 rounded-full w-12 h-12 mx-auto mb-3 flex items-center justify-center text-gray-400 group-hover:text-cyan-400 transition-colors">
-                            <i class="fa-solid fa-[#fa-cloud-arrow-up] fa-cloud-arrow-up text-xl"></i>
+                            <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
                         </div>
                         <p class="text-sm font-medium text-gray-300 group-hover:text-cyan-300">Arrastrá cualquier archivo aquí o <span class="text-cyan-400 underline">examiná</span></p>
                         <p class="text-xs text-gray-500 mt-1">Soporta binarios: PDF, PNG, JPG, MP4, DAT, etc.</p>
@@ -292,7 +287,7 @@
         // Envío de Evidencia a la API
         btnPetrify.addEventListener('click', async () => {
             if (!selectedFile) {
-                alert('Por favor selecciones o arrastre un archivo antes de continuar.');
+                alert('Por favor seleccione o arrastre un archivo antes de continuar.');
                 return;
             }
 
