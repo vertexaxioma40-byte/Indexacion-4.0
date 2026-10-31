@@ -125,7 +125,7 @@ class AxiomaCloudPetrification:
                 "metadata_caso": manifest["metadata_caso"],
                 "compliance_seal": manifest["compliance_seal"]
             }
-            self.supabase.table("axioma_evidencias").insert(data_to_insert).execute()
+            self.supabase.table("axioma_evidencias").insert(db_payload).execute()
         except Exception as e:
             print(f"Error Supabase: {e}")
 
